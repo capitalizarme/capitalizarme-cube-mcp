@@ -88,6 +88,8 @@ By default, the server expects your Cube.js API to be available at `http://local
 
 You can override this by setting the `CUBEJS_API_URL` environment variable.
 
+If your Cube.js deployment enforces auth / multi-tenant security contexts (e.g. requires a JWT with a tenant claim), set `CUBEJS_API_SECRET` (or `CUBEJS_API_TOKEN`) to a Cube API token/JWT — it is sent as the client's bearer token. Without it, the client connects with an empty token, which fails on any Cube instance that requires authentication.
+
 To integrate this semantic layer into Cursor or any other MCP-compatible IDE/Agent, configure it as a **stdio** tool.
 
 **Example `mcp.json` / Client Configuration:**
@@ -99,7 +101,8 @@ To integrate this semantic layer into Cursor or any other MCP-compatible IDE/Age
       "command": "npx",
       "args": ["-y", "@mob999/cube_mcp"],
       "env": {
-        "CUBEJS_API_URL": "http://localhost:4000/cubejs-api/v1"
+        "CUBEJS_API_URL": "http://localhost:4000/cubejs-api/v1",
+        "CUBEJS_API_SECRET": "<your Cube API token / JWT, if auth is enabled>"
       }
     }
   }

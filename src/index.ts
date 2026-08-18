@@ -14,10 +14,11 @@ import * as path from "path";
 import { buildCubeQuery } from "./query";
 // Initialize Cube.js Client
 const cubejsApiUrl = process.env.CUBEJS_API_URL || "http://localhost:4000/cubejs-api/v1";
+const cubejsApiToken = process.env.CUBEJS_API_SECRET || process.env.CUBEJS_API_TOKEN || "";
 // @ts-ignore: cubejs default export can be tricky with some tsconfig setups, but typically works
 const cubejsApi = cubejs.default || cubejs;
 
-const client = cubejsApi("", { apiUrl: cubejsApiUrl });
+const client = cubejsApi(cubejsApiToken, { apiUrl: cubejsApiUrl });
 
 // Tool Definitions
 const DISCOVER_ENTITIES_TOOL: Tool = {
